@@ -1,26 +1,5 @@
 import argparse
-import json
-from pathlib import Path
-
-
-def get_movies(filename: str):
-    file = Path(__file__).parent.parent / "data" / filename
-    with open(file, "r") as f:
-        movies = json.load(f)
-    return movies
-
-
-def list_movies(query: str):
-    movies = get_movies("movies.json")
-    movies = movies["movies"]
-    res = []
-    for movie in movies:
-        if query in movie["title"]:
-            res.append(movie)
-    res.sort(key=lambda x: x["id"])
-    for movie in res[:5]:
-        if movie:
-            print(movie["title"])
+from lib.keyword_search import search_command
 
 
 def main() -> None:
@@ -35,8 +14,9 @@ def main() -> None:
     match args.command:
         case "search":
             # print the search query here
-            print(f"Searching for: {args.query}")
-            list_movies(args.query)
+            results = search_command(args.query)
+            for i, res in enumerate(results, 1):
+                print(f"{i}. {res['title']}")
         case _:
             parser.print_help()
 
