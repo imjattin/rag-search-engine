@@ -23,7 +23,7 @@ class GoldenTestCase(TypedDict):
 
 
 class GoldenDataset(TypedDict):
-    test_cases = list[GoldenTestCase]
+    test_cases: list[GoldenTestCase]
 
 
 DEFAULT_ALPHA = 0.5
