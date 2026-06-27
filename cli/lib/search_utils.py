@@ -6,7 +6,7 @@ from typing import Any, TypedDict
 class Movie(TypedDict):
     id: int
     title: str
-    desctiption: str
+    description: str
 
 
 class SearchResult(TypedDict):
